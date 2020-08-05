@@ -48,6 +48,10 @@ function commandLineArgs() {
       '--release [release]',
       'Assign a release version to these stories'
     )
+    .option(
+      '-t, --ticket <ticketId>',
+      'Add the changelog to the description of the specified ticket'
+    )
     .parse(process.argv);
 }
 
@@ -94,6 +98,11 @@ async function runProgram() {
     // Post to slack
     if (program.slack) {
       await postToSlack(config, tmplData, changelogMessage);
+    }
+
+    // Update release ticket if one is provided
+    if (program.ticket) {
+      await jira.updateReleaseTicket(program.ticket, changelogMessage);
     }
   } catch(e) {
     console.error(e.stack || e);

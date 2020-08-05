@@ -178,6 +178,22 @@ describe('Release version', () => {
   });
 });
 
+describe('Update release ticket', () => {
+  test('add changelog to ticket description', async () => {
+    const ticketId = 'ENG-123';
+    const changelogMessage = 'my changelog message';
+    const mockUpdateIssue = jira.jira.updateIssue;
+
+    await jira.updateReleaseTicket(ticketId, changelogMessage);
+
+    expect(mockUpdateIssue).toBeCalledTimes(1);
+    expect(mockUpdateIssue).toHaveBeenCalledWith(
+      ticketId,
+      { fields: { description: changelogMessage } }
+    );
+  });
+});
+
 // Pull it all together
 describe('Generate changelog', () => {
   const commits = [

@@ -291,4 +291,24 @@ export default class Jira {
       })
       .filter(m => !!m);
   }
+
+  /**
+   * Replace the given JIRA ticket's description with the changelog
+   * @param {String} ticketId 
+   * @param {String} changelogMessage 
+   * @returns {Promise<JiraApi.JsonResponse>}
+   */
+  async updateReleaseTicket(ticketId, changelogMessage) {
+    if (!this.jira) {
+      throw new Error('Jira is not configured.');
+    }
+
+    const result = await this.jira.updateIssue(ticketId, {
+      fields: { 
+        description: changelogMessage
+      }
+    });
+
+    return result;
+  }
 }
