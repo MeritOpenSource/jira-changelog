@@ -10,7 +10,7 @@ const promiseThrottle = new PromiseThrottle({
 });
 
 /**
- * Generate changelog by matching source control commit logs to jiar tickets.
+ * Generate changelog by matching source control commit logs to jira tickets.
  */
 export default class Jira {
 
@@ -93,7 +93,7 @@ export default class Jira {
    *
    * @param {Object} commitLog - Commit log object
    * @param {String} releaseVersion - Release version eg, mobileweb-1.8.0
-   * @return {Promsie} Resolves to an object with a jira array property
+   * @return {Promise} Resolves to an object with a jira array property
    */
   async findJiraInCommit(commitLog) {
     const log = Object.assign({tickets: []}, { ...commitLog } );
@@ -226,7 +226,7 @@ export default class Jira {
   }
 
   /**
-   * Retreive the jira issue by ID.
+   * Retrieve the jira issue by ID.
    * Also attempt to match a slack user to the reporter's email address.
    *
    * @param {String} ticketId - The ticket ID of the issue to retrieve.

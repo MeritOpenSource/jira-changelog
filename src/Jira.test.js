@@ -149,7 +149,7 @@ describe('Release version', () => {
     expect(jira.jira.createVersion).toHaveBeenCalled();
   });
 
-  test('reuse existing proejct version', async () => {
+  test('reuse existing project version', async () => {
     jiraVersions = [{
       name: 'test-version-1',
       project: 'project1',
